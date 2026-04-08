@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slotwise — Your calendar, inside your chat</title>
+<meta name="description" content="Slotwise is a WhatsApp scheduling assistant that makes booking effortless. Join the waitlist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=General+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #FAF7F2;
+    --fg: #1A1A1A;
+    --accent: #2D6A4F;
+    --accent-light: #D8F3DC;
+    --accent-hover: #1B4332;
+    --muted: #8A8478;
+    --card: #FFFFFF;
+    --chat-green: #DCF8C6;
+    --chat-white: #FFFFFF;
+    --radius: 16px;
+    --font-display: 'DM Serif Display', serif;
+    --font-body: 'General Sans', -apple-system, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--fg);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-cta {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.875rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: -10%;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(45,106,79,0.07) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: drift 20s ease-in-out infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -10%; right: -10%;
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(216,243,220,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: drift 25s ease-in-out infinite reverse;
+  }
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -20px); }
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── WAITLIST FORM ── */
+  .waitlist-form {
+    display: flex;
+    gap: 0.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+    position: relative;
+    z-index: 2;
+  }
+
+  .waitlist-form input {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 0.85rem 1.4rem;
+    border: 2px solid rgba(0,0,0,0.08);
+    border-radius: 100px;
+    background: var(--card);
+    color: var(--fg);
+    width: 300px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .waitlist-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(45,106,79,0.1);
+  }
+
+  .waitlist-form input::placeholder { color: var(--muted); }
+
+  .waitlist-form button {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+
+  .waitlist-form button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
+  .form-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .success-msg {
+    display: none;
+    background: var(--accent-light);
+    color: var(--accent-hover);
+    font-weight: 600;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-size: 1rem;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  /* ── CHAT MOCKUP ── */
+  .chat-preview {
+    margin-top: 5rem;
+    animation: fadeUp 0.6s 0.5s ease both;
+    position: relative;
+    z-index: 2;
+  }
+
+  .phone-frame {
+    background: #E5DDD5;
+    border-radius: 24px;
+    padding: 1.5rem 1rem;
+    max-width: 380px;
+    margin: 0 auto;
+    box-shadow:
+      0 25px 60px rgba(0,0,0,0.12),
+      0 4px 12px rgba(0,0,0,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .chat-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .chat-avatar {
+    width: 40px; height: 40px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .chat-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--fg);
+  }
+
+  .chat-status {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .messages { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .msg {
+    padding: 0.6rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    max-width: 82%;
+    position: relative;
+    opacity: 0;
+    animation: msgAppear 0.4s ease both;
+  }
+
+  .msg-user {
+    background: var(--chat-green);
+    align-self: flex-end;
+    border-bottom-right-radius: 3px;
+  }
+
+  .msg-bot {
+    background: var(--chat-white);
+    align-self: flex-start;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+  }
+
+  .msg:nth-child(1) { animation-delay: 0.8s; }
+  .msg:nth-child(2) { animation-delay: 1.6s; }
+  .msg:nth-child(3) { animation-delay: 2.6s; }
+  .msg:nth-child(4) { animation-delay: 3.6s; }
+
+  .msg-time {
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 0.2rem;
+  }
+
+  @keyframes msgAppear {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ── HOW IT WORKS ── */
+  .section {
+    padding: 6rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .step {
+    background: var(--card);
+    padding: 2rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step h3 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .step p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  /* ── BOTTOM CTA ── */
+  .bottom-cta {
+    text-align: center;
+    padding: 6rem 2rem 8rem;
+  }
+
+  .bottom-cta h2 {
+    margin-bottom: 1rem;
+  }
+
+  .bottom-cta p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .waitlist-form {
+      flex-direction: column;
+      width: 100%;
+      max-width: 340px;
+    }
+    .waitlist-form input { width: 100%; }
+    .phone-frame { max-width: 320px; }
+    nav { padding: 1rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">slot<span>wise</span></a>
+  <a href="#waitlist" class="nav-cta">Join waitlist</a>
+</nav>
+
+<section class="hero">
+  <div class="badge">Coming soon</div>
+  <h1>Your calendar,<br>inside your <em>chat</em></h1>
+  <p class="hero-sub">Schedule meetings, check your agenda, and manage your time — all from a simple WhatsApp message.</p>
+
+  <div id="waitlist">
+    <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+      <button type="submit">Get early access</button>
+    </form>
+    <div class="success-msg" id="successMsg">You're on the list! We'll be in touch soon.</div>
+  </div>
+  <p class="form-note">Free during beta · No spam, ever</p>
+
+  <div class="chat-preview">
+    <div class="phone-frame">
+      <div class="chat-header">
+        <div class="chat-avatar">S</div>
+        <div>
+          <div class="chat-name">Slotwise</div>
+          <div class="chat-status">online</div>
+        </div>
+      </div>
+      <div class="messages">
+        <div class="msg msg-user">What does my Tuesday look like?<div class="msg-time">10:31</div></div>
+        <div class="msg msg-bot">You have 2 meetings:<br>☕ Coffee with Ana — 9:00<br>📊 Sprint review — 14:00<br>The rest of the day is free!<div class="msg-time">10:31</div></div>
+        <div class="msg msg-user">Book lunch with Marc at 13:00<div class="msg-time">10:32</div></div>
+        <div class="msg msg-bot">Done! 🍽️ "Lunch with Marc" added to Tuesday at 13:00. I've sent Marc an invite.<div class="msg-time">10:32</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">How it works</div>
+  <h2>Scheduling should be this simple</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Message @Cal</h3>
+      <p>Send a WhatsApp message like you would to any friend. No app to download, no new interface to learn.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Say what you need</h3>
+      <p>"Schedule a call with Laura this week" or "Am I free Thursday afternoon?" — just talk naturally.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>It just happens</h3>
+      <p>Events get created, conflicts get flagged, invites get sent. Your calendar stays in sync — you stay in your chat.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bottom-cta">
+  <h2>Stop switching apps<br>to manage your time</h2>
+  <p>Be the first to try Slotwise when we launch.</p>
+  <form class="waitlist-form" style="justify-content: center; animation: none;" id="waitlistForm2" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+    <button type="submit">Get early access</button>
+  </form>
+  <div class="success-msg" id="successMsg2" style="margin-top:1rem;">You're on the list! We'll be in touch soon.</div>
+</section>
+
+<footer>
+  &copy; 2026 Slotwise · Barcelona
+</footer>
+
+<script>
+  // Handle form submissions with fetch (no page reload)
+  function handleForm(formId, msgId) {
+    const form = document.getElementById(formId);
+    const msg = document.getElementById(msgId);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          msg.style.display = 'inline-block';
+        } else {
+          alert('Something went wrong — please try again.');
+        }
+      } catch {
+        alert('Something went wrong — please try again.');
+      }
+    });
+  }
+
+  handleForm('waitlistForm', 'successMsg');
+  handleForm('waitlistForm2', 'successMsg2');
+</script>
+
+</body>
+</html>
