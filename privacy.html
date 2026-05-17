@@ -14,9 +14,9 @@
   :root {
     --bg: #FAF7F2;
     --fg: #1A1A1A;
-    --accent: #2D6A4F;
-    --accent-light: #D8F3DC;
-    --accent-hover: #1B4332;
+    --accent: #10B981;
+    --accent-light: #D1FAE5;
+    --accent-hover: #059669;
     --muted: #8A8478;
     --card: #FFFFFF;
     --radius: 16px;
@@ -54,6 +54,23 @@
     text-decoration: none;
   }
   .logo span { color: var(--accent); }
+  .logo-icon { width: 28px; height: 28px; vertical-align: middle; margin-right: 0.5rem; border-radius: 6px; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--fg); }
 
   .nav-cta {
     background: var(--accent);
@@ -61,11 +78,11 @@
     padding: 0.6rem 1.4rem;
     border-radius: 99px;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: background 0.2s;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: background 0.2s, transform 0.15s;
   }
-  .nav-cta:hover { background: var(--accent-hover); }
+  .nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
   .policy-container {
     max-width: 780px;
@@ -145,8 +162,12 @@
 <body>
 
 <nav>
-  <a href="/" class="logo">slot<span>wise</span></a>
-  <a href="/#waitlist" class="nav-cta">Join waitlist</a>
+  <a href="/" class="logo"><img src="/Logo/slotwise-logo-light.svg" alt="Slotwise" class="logo-icon">slot<span>wise</span></a>
+  <div class="nav-links">
+    <a href="/privacy.html" class="nav-link">Privacy</a>
+    <a href="/contact.html" class="nav-link">Contact</a>
+    <a href="/#waitlist" class="nav-cta">Join waitlist</a>
+  </div>
 </nav>
 
 <div class="policy-container">
