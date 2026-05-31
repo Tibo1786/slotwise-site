@@ -133,33 +133,48 @@
     50% { transform: translate(30px, -20px); }
   }
 
-  .badge {
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tg-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--accent-light);
-    color: var(--accent);
+    font-family: var(--font-body);
     font-weight: 600;
-    font-size: 0.8rem;
-    padding: 0.4rem 1rem;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.8rem;
+    background: #2AABEE;
+    color: #fff;
+    border: none;
     border-radius: 100px;
-    margin-bottom: 2rem;
-    letter-spacing: 0.03em;
+    cursor: default;
+    text-decoration: none;
+    opacity: 0.7;
+    position: relative;
+  }
+
+  .tg-cta svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  .tg-cta .tg-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
     text-transform: uppercase;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.4); }
+    letter-spacing: 0.05em;
+    background: rgba(255,255,255,0.25);
+    padding: 0.15rem 0.5rem;
+    border-radius: 100px;
   }
 
   h1 {
@@ -190,52 +205,37 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── WAITLIST FORM ── */
-  .waitlist-form {
-    display: flex;
-    gap: 0.5rem;
+  /* ── CTA BUTTON ── */
+  .wa-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 1rem 2.2rem;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
     animation: fadeUp 0.6s 0.3s ease both;
     position: relative;
     z-index: 2;
   }
 
-  .waitlist-form input {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    padding: 0.85rem 1.4rem;
-    border: 2px solid rgba(0,0,0,0.08);
-    border-radius: 100px;
-    background: var(--card);
-    color: var(--fg);
-    width: 300px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+  .wa-cta:hover {
+    background: #1ebe5d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
   }
 
-  .waitlist-form input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(45,106,79,0.1);
-  }
-
-  .waitlist-form input::placeholder { color: var(--muted); }
-
-  .waitlist-form button {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.85rem 2rem;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    white-space: nowrap;
-  }
-
-  .waitlist-form button:hover {
-    background: var(--accent-hover);
-    transform: translateY(-1px);
+  .wa-cta svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
   }
 
   .form-note {
@@ -243,17 +243,6 @@
     color: var(--muted);
     margin-top: 1rem;
     animation: fadeUp 0.6s 0.4s ease both;
-  }
-
-  .success-msg {
-    display: none;
-    background: var(--accent-light);
-    color: var(--accent-hover);
-    font-weight: 600;
-    padding: 0.85rem 2rem;
-    border-radius: 100px;
-    font-size: 1rem;
-    animation: fadeUp 0.3s ease both;
   }
 
   /* ── CHAT MOCKUP ── */
@@ -451,12 +440,6 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
-    .waitlist-form {
-      flex-direction: column;
-      width: 100%;
-      max-width: 340px;
-    }
-    .waitlist-form input { width: 100%; }
     .phone-frame { max-width: 320px; }
     nav { padding: 1rem 1.25rem; }
   }
@@ -467,26 +450,29 @@
 <nav>
   <a href="#" class="logo"><svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="28" height="28" role="img" aria-label="Slotwise"><rect width="80" height="80" rx="18" fill="#0F172A"/><rect x="15" y="32" width="50" height="16" rx="5" fill="#10B981"/></svg>slot<span>wise</span></a>
   <div class="nav-links">
+    <a href="/pricing.html" class="nav-link">Pricing</a>
     <a href="/privacy.html" class="nav-link">Privacy</a>
     <a href="/terms.html" class="nav-link">Terms</a>
     <a href="/contact.html" class="nav-link">Contact</a>
-    <a href="#waitlist" class="nav-cta">Join waitlist</a>
+    <a href="#" class="nav-cta" onclick="window.open(getWhatsAppLink(),'_blank');return false">Start free</a>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="badge">Coming soon</div>
   <h1>Your calendar,<br>inside your <em>chat</em></h1>
   <p class="hero-sub">Schedule meetings, check your agenda, and manage your time — all from a simple WhatsApp message.</p>
 
-  <div id="waitlist">
-    <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/mpqoezrb" method="POST">
-      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-      <button type="submit">Get early access</button>
-    </form>
-    <div class="success-msg" id="successMsg">You're on the list! We'll be in touch soon.</div>
+  <div class="cta-group">
+    <a href="#" class="wa-cta" onclick="window.open(getWhatsAppLink(),'_blank');return false">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Start scheduling free
+    </a>
+    <span class="tg-cta">
+      <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      Telegram <span class="tg-badge">Coming soon</span>
+    </span>
   </div>
-  <p class="form-note">Free during beta · No spam, ever</p>
+  <p class="form-note">10 bookings/month free · <a href="/pricing.html" style="color:var(--accent);text-decoration:none">See pricing</a></p>
 
   <div class="chat-preview">
     <div class="phone-frame">
@@ -531,49 +517,32 @@
 
 <section class="bottom-cta">
   <h2>Stop switching apps<br>to manage your time</h2>
-  <p>Be the first to try Slotwise when we launch.</p>
-  <form class="waitlist-form" style="justify-content: center; animation: none;" id="waitlistForm2" action="https://formspree.io/f/mpqoezrb" method="POST">
-    <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-    <button type="submit">Get early access</button>
-  </form>
-  <div class="success-msg" id="successMsg2" style="margin-top:1rem;">You're on the list! We'll be in touch soon.</div>
+  <p>Start with 10 free bookings every month. Need more? <a href="/pricing.html" style="color:var(--accent);text-decoration:none;font-weight:600">See pricing</a>.</p>
+  <a href="#" class="wa-cta" style="animation:none" onclick="window.open(getWhatsAppLink(),'_blank');return false">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Start scheduling free
+  </a>
 </section>
 
 <footer>
-  &copy; 2026 Slotwise · Barcelona · <a href="/privacy.html" style="color: #8A8478;">Privacy</a> · <a href="/terms.html" style="color: #8A8478;">Terms</a> · <a href="/contact.html" style="color: #8A8478;">Contact</a>
+  &copy; 2026 Slotwise · Barcelona · <a href="/pricing.html" style="color: #8A8478;">Pricing</a> · <a href="/privacy.html" style="color: #8A8478;">Privacy</a> · <a href="/terms.html" style="color: #8A8478;">Terms</a> · <a href="/contact.html" style="color: #8A8478;">Contact</a>
 </footer>
 
 <script>
-  // Handle form submissions with fetch (no page reload)
-  function handleForm(formId, msgId) {
-    const form = document.getElementById(formId);
-    const msg = document.getElementById(msgId);
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          form.style.display = 'none';
-          msg.style.display = 'inline-block';
-        } else {
-          alert('Something went wrong — please try again.');
-        }
-      } catch {
-        alert('Something went wrong — please try again.');
-      }
-    });
+  function getWhatsAppLink() {
+    var lang = (navigator.language || 'en').split('-')[0];
+    var messages = {
+      es: 'Hola! Quiero probar Slotwise 👋',
+      ca: 'Hola! Vull provar el Slotwise 👋',
+      fr: 'Bonjour! Je veux essayer Slotwise 👋',
+      de: 'Hallo! Ich möchte Slotwise ausprobieren 👋',
+      pt: 'Olá! Quero experimentar o Slotwise 👋',
+      it: 'Ciao! Voglio provare Slotwise 👋',
+      en: 'Hi! I want to try Slotwise 👋'
+    };
+    var msg = messages[lang] || messages['en'];
+    return 'https://wa.me/34684482597?text=' + encodeURIComponent(msg);
   }
-
-  handleForm('waitlistForm', 'successMsg');
-  handleForm('waitlistForm2', 'successMsg2');
 </script>
 
 </body>
