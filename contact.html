@@ -216,19 +216,54 @@
 
   footer a { color: var(--muted); }
 
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    z-index: 101;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--fg);
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   @media (max-width: 600px) {
     .contact-container { padding: 6rem 1.25rem 3rem; }
     .contact-container h1 { font-size: 2rem; }
     nav { padding: 1rem 1.25rem; }
-    .nav-links { gap: 1rem; }
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: fixed; top: 0; right: 0; width: 240px; height: 100vh;
+      background: var(--bg); flex-direction: column; align-items: flex-start;
+      padding: 5rem 2rem 2rem; gap: 1.25rem; z-index: 101;
+      box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+      transform: translateX(100%); transition: transform 0.3s ease;
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-link { font-size: 1rem; }
+    .nav-cta { margin-top: 0.5rem; width: 100%; text-align: center; }
+    .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 99; }
+    .nav-overlay.open { display: block; }
   }
 </style>
 </head>
 <body>
 
+<div class="nav-overlay" id="navOverlay"></div>
 <nav>
   <a href="/" class="logo"><svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="28" height="28" role="img" aria-label="Slotwise"><rect width="80" height="80" rx="18" fill="#0F172A"/><rect x="15" y="32" width="50" height="16" rx="5" fill="#10B981"/></svg>slot<span>wise</span></a>
-  <div class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
     <a href="/pricing.html" class="nav-link">Pricing</a>
     <a href="/privacy.html" class="nav-link">Privacy</a>
     <a href="/terms.html" class="nav-link">Terms</a>
@@ -269,6 +304,14 @@
 </footer>
 
 <script>
+  (function() {
+    var t = document.getElementById('navToggle'), l = document.getElementById('navLinks'), o = document.getElementById('navOverlay');
+    function close() { t.classList.remove('open'); l.classList.remove('open'); o.classList.remove('open'); }
+    t.addEventListener('click', function() { t.classList.toggle('open'); l.classList.toggle('open'); o.classList.toggle('open'); });
+    o.addEventListener('click', close);
+    l.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', close); });
+  })();
+
   const form = document.getElementById('contactForm');
   const msg = document.getElementById('contactSuccess');
 
