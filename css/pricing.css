@@ -1,0 +1,181 @@
+/* ── PRICING CONTAINER ── */
+.pricing-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+  text-align: center;
+}
+
+.pricing-container h1 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-subtitle {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+/* ── PRICING GRID ── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.plan {
+  background: var(--card);
+  border: 2px solid #e8e4de;
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan.featured {
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.12);
+  position: relative;
+}
+
+.plan-badge {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 1rem;
+  border-radius: 100px;
+}
+
+.plan-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.plan-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.plan-price {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.plan-price .currency {
+  font-size: 1.5rem;
+  vertical-align: super;
+}
+
+.plan-price .period {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.plan-features {
+  list-style: none;
+  margin: 1.5rem 0;
+  flex: 1;
+}
+
+.plan-features li {
+  padding: 0.5rem 0;
+  padding-left: 1.6rem;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.plan-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 16px;
+  height: 16px;
+  background: var(--accent-light);
+  border-radius: 50%;
+}
+
+.plan-features li::after {
+  content: '';
+  position: absolute;
+  left: 4.5px;
+  top: 13.5px;
+  width: 7px;
+  height: 4px;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.plan-features li.disabled {
+  color: var(--muted);
+}
+
+.plan-features li.disabled::before {
+  background: #f0ece6;
+}
+
+.plan-features li.disabled::after {
+  border-color: #c4bfb6;
+}
+
+.plan-cta {
+  display: inline-block;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.85rem 2rem;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+.plan-cta.primary {
+  background: var(--accent);
+  color: #fff;
+}
+.plan-cta.primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.plan-cta.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+.plan-cta.secondary:hover {
+  background: var(--accent-light);
+  transform: translateY(-1px);
+}
+
+.pricing-note {
+  margin-top: 2.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+}

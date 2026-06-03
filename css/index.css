@@ -1,0 +1,294 @@
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; left: -10%;
+  width: 50vw; height: 50vw;
+  background: radial-gradient(circle, rgba(45,106,79,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: drift 20s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -10%; right: -10%;
+  width: 40vw; height: 40vw;
+  background: radial-gradient(circle, rgba(216,243,220,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: drift 25s ease-in-out infinite reverse;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -20px); }
+}
+
+/* ── CTA GROUP ── */
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  animation: fadeUp 0.6s 0.3s ease both;
+  position: relative;
+  z-index: 2;
+}
+
+.tg-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.8rem;
+  background: #2AABEE;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  cursor: default;
+  text-decoration: none;
+  opacity: 0.7;
+  position: relative;
+}
+
+.tg-cta svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.tg-cta .tg-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(255,255,255,0.25);
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+}
+
+/* ── H1 ── */
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* ── HERO SUB ── */
+.hero-sub {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 3rem;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── CHAT MOCKUP ── */
+.chat-preview {
+  margin-top: 5rem;
+  animation: fadeUp 0.6s 0.5s ease both;
+  position: relative;
+  z-index: 2;
+}
+
+.phone-frame {
+  background: #E5DDD5;
+  border-radius: 24px;
+  padding: 1.5rem 1rem;
+  max-width: 380px;
+  margin: 0 auto;
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.12),
+    0 4px 12px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.chat-avatar {
+  width: 40px; height: 40px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.chat-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--fg);
+}
+
+.chat-status {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.messages { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.msg {
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  max-width: 82%;
+  position: relative;
+  opacity: 0;
+  animation: msgAppear 0.4s ease both;
+}
+
+.msg-user {
+  background: var(--chat-green);
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+
+.msg-bot {
+  background: var(--chat-white);
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.msg:nth-child(1) { animation-delay: 0.8s; }
+.msg:nth-child(2) { animation-delay: 1.6s; }
+.msg:nth-child(3) { animation-delay: 2.6s; }
+.msg:nth-child(4) { animation-delay: 3.6s; }
+
+.msg-time {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: right;
+  margin-top: 0.2rem;
+}
+
+@keyframes msgAppear {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── HOW IT WORKS ── */
+.section {
+  padding: 6rem 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.step {
+  background: var(--card);
+  padding: 2rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+}
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.step h3 {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.step p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ── BOTTOM CTA ── */
+.bottom-cta {
+  text-align: center;
+  padding: 6rem 2rem 8rem;
+}
+
+.bottom-cta h2 {
+  margin-bottom: 1rem;
+}
+
+.bottom-cta p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .phone-frame { max-width: 320px; }
+}

@@ -1,261 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-title="page.title.contact">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Slotwise</title>
-<meta name="description" content="Get in touch with the Slotwise team.">
+<meta data-i18n-content="meta.description.contact" name="description" content="Get in touch with the Slotwise team.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=General+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #FAF7F2;
-    --fg: #1A1A1A;
-    --accent: #10B981;
-    --accent-light: #D1FAE5;
-    --accent-hover: #059669;
-    --muted: #8A8478;
-    --card: #FFFFFF;
-    --radius: 16px;
-    --font-display: 'DM Serif Display', serif;
-    --font-body: 'General Sans', -apple-system, sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--font-body);
-    background: var(--bg);
-    color: var(--fg);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.25rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(250, 247, 242, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-  }
-
-  .logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    color: var(--fg);
-    text-decoration: none;
-  }
-  .logo span { color: var(--accent); }
-  .logo-icon { width: 28px; height: 28px; vertical-align: middle; margin-right: 0.5rem; border-radius: 6px; }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .nav-link {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-link:hover { color: var(--fg); }
-
-  .nav-cta {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.875rem;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.4rem;
-    border-radius: 100px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
-
-  .contact-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 8rem 2rem 4rem;
-  }
-
-  .contact-container h1 {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-container .subtitle {
-    color: var(--muted);
-    font-size: 1.05rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .contact-email {
-    background: var(--card);
-    border: 1px solid #e8e4de;
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 2.5rem;
-    text-align: center;
-  }
-
-  .contact-email p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-email a {
-    color: var(--accent);
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .contact-email a:hover { text-decoration: underline; }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #e8e4de;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .contact-form label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--fg);
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 0.85rem 1rem;
-    border: 1px solid #e0dcd6;
-    border-radius: 10px;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    background: var(--card);
-    color: var(--fg);
-    transition: border-color 0.2s;
-    outline: none;
-  }
-
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    border-color: var(--accent);
-  }
-
-  .contact-form textarea {
-    min-height: 140px;
-    resize: vertical;
-  }
-
-  .contact-form button {
-    align-self: flex-start;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 1rem;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    padding: 0.85rem 2rem;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .contact-form button:hover { background: var(--accent-hover); transform: translateY(-1px); }
-
-  .success-msg {
-    display: none;
-    background: var(--accent-light);
-    color: var(--accent-hover);
-    padding: 1rem 1.5rem;
-    border-radius: 10px;
-    font-weight: 500;
-    margin-top: 0.5rem;
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    color: var(--muted);
-    font-size: 0.85rem;
-    border-top: 1px solid #e8e4de;
-    margin-top: 3rem;
-  }
-
-  footer a { color: var(--muted); }
-
-  .nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem;
-    z-index: 101;
-  }
-  .nav-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--fg);
-    margin: 5px 0;
-    border-radius: 2px;
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  @media (max-width: 600px) {
-    .contact-container { padding: 6rem 1.25rem 3rem; }
-    .contact-container h1 { font-size: 2rem; }
-    nav { padding: 1rem 1.25rem; }
-    .nav-toggle { display: block; }
-    .nav-links {
-      position: fixed; top: 0; right: 0; width: 240px; height: 100vh;
-      background: var(--bg); flex-direction: column; align-items: flex-start;
-      padding: 5rem 2rem 2rem; gap: 1.25rem; z-index: 101;
-      box-shadow: -4px 0 24px rgba(0,0,0,0.08);
-      transform: translateX(100%); transition: transform 0.3s ease;
-    }
-    .nav-links.open { transform: translateX(0); }
-    .nav-link { font-size: 1rem; }
-    .nav-cta { margin-top: 0.5rem; width: 100%; text-align: center; }
-    .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 99; }
-    .nav-overlay.open { display: block; }
-  }
-</style>
+<link rel="stylesheet" href="/css/shared.css">
+<link rel="stylesheet" href="/css/contact.css">
+<link rel="alternate" hreflang="en" href="https://slotwise.eu/contact.html">
+<link rel="alternate" hreflang="fr" href="https://slotwise.eu/contact.html?lang=fr">
+<link rel="alternate" hreflang="es" href="https://slotwise.eu/contact.html?lang=es">
+<link rel="alternate" hreflang="x-default" href="https://slotwise.eu/contact.html">
 </head>
 <body>
 
@@ -264,79 +22,55 @@
   <a href="/" class="logo"><svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="28" height="28" role="img" aria-label="Slotwise"><rect width="80" height="80" rx="18" fill="#0F172A"/><rect x="15" y="32" width="50" height="16" rx="5" fill="#10B981"/></svg>slot<span>wise</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-links" id="navLinks">
-    <a href="/pricing.html" class="nav-link">Pricing</a>
-    <a href="/privacy.html" class="nav-link">Privacy</a>
-    <a href="/terms.html" class="nav-link">Terms</a>
-    <a href="/contact.html" class="nav-link">Contact</a>
-    <a href="/" class="nav-cta">Start free</a>
+    <a href="/pricing.html" class="nav-link" data-i18n="nav.pricing">Pricing</a>
+    <a href="/privacy.html" class="nav-link" data-i18n="nav.privacy">Privacy</a>
+    <a href="/terms.html" class="nav-link" data-i18n="nav.terms">Terms</a>
+    <a href="/contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
+    <div class="lang-picker" id="langPicker">
+      <button class="lang-current" aria-label="Change language">EN ▾</button>
+      <div class="lang-dropdown">
+        <a href="?lang=en" class="lang-option" data-lang="en">English</a>
+        <a href="?lang=fr" class="lang-option" data-lang="fr">Français</a>
+        <a href="?lang=es" class="lang-option" data-lang="es">Español</a>
+      </div>
+    </div>
+    <a href="/" class="nav-cta" data-i18n="nav.cta">Start free</a>
   </div>
 </nav>
 
 <div class="contact-container">
 
-<h1>Contact us</h1>
-<p class="subtitle">Have a question, feedback, or need help? We'd love to hear from you.</p>
+<h1 data-i18n="contact.title">Contact us</h1>
+<p class="subtitle" data-i18n="contact.subtitle">Have a question, feedback, or need help? We'd love to hear from you.</p>
 
 <div class="contact-email">
-  <p>Email us directly</p>
+  <p data-i18n="contact.email_label">Email us directly</p>
   <a href="mailto:contact@slotwise.eu">contact@slotwise.eu</a>
 </div>
 
-<div class="divider">or send a message</div>
+<div class="divider" data-i18n="contact.divider">or send a message</div>
 
 <form class="contact-form" id="contactForm" action="https://formspree.io/f/mpqoezrb" method="POST">
   <div>
-    <label for="contact-email">Your email</label>
-    <input type="email" id="contact-email" name="email" placeholder="you@example.com" required autocomplete="email">
+    <label for="contact-email" data-i18n="contact.form.email_label">Your email</label>
+    <input type="email" id="contact-email" name="email" placeholder="you@example.com" data-i18n-placeholder="contact.form.email_placeholder" required autocomplete="email">
   </div>
   <div>
-    <label for="contact-message">Message</label>
-    <textarea id="contact-message" name="message" placeholder="How can we help?" required></textarea>
+    <label for="contact-message" data-i18n="contact.form.message_label">Message</label>
+    <textarea id="contact-message" name="message" placeholder="How can we help?" data-i18n-placeholder="contact.form.message_placeholder" required></textarea>
   </div>
-  <button type="submit">Send message</button>
+  <button type="submit" data-i18n="contact.form.submit">Send message</button>
 </form>
-<div class="success-msg" id="contactSuccess">Message sent! We'll get back to you soon.</div>
+<div class="success-msg" id="contactSuccess" data-i18n="contact.form.success">Message sent! We'll get back to you soon.</div>
 
 </div>
 
 <footer>
-  &copy; 2026 Slotwise · Barcelona · <a href="/">Home</a> · <a href="/pricing.html">Pricing</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+  <span data-i18n="footer.text">&copy; 2026 Slotwise · Barcelona</span> · <a href="/">Home</a> · <a href="/pricing.html" data-i18n="nav.pricing">Pricing</a> · <a href="/privacy.html" data-i18n="nav.privacy">Privacy</a> · <a href="/terms.html" data-i18n="nav.terms">Terms</a>
 </footer>
 
-<script>
-  (function() {
-    var t = document.getElementById('navToggle'), l = document.getElementById('navLinks'), o = document.getElementById('navOverlay');
-    function close() { t.classList.remove('open'); l.classList.remove('open'); o.classList.remove('open'); }
-    t.addEventListener('click', function() { t.classList.toggle('open'); l.classList.toggle('open'); o.classList.toggle('open'); });
-    o.addEventListener('click', close);
-    l.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', close); });
-  })();
-
-  const form = document.getElementById('contactForm');
-  const msg = document.getElementById('contactSuccess');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (res.ok) {
-        form.style.display = 'none';
-        msg.style.display = 'block';
-      } else {
-        alert('Something went wrong — please try again.');
-      }
-    } catch {
-      alert('Something went wrong — please try again.');
-    }
-  });
-</script>
+<script src="/js/shared.js"></script>
+<script src="/js/contact.js"></script>
 
 </body>
 </html>

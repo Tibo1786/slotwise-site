@@ -1,0 +1,94 @@
+/* ── BODY OVERRIDE ── */
+body {
+  line-height: 1.8;
+}
+
+/* ── LEGAL CONTAINERS ── */
+.policy-container,
+.terms-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+}
+
+.policy-container h1,
+.terms-container h1 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--fg);
+}
+
+.policy-container .last-updated,
+.terms-container .last-updated {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 3rem;
+}
+
+.policy-container h2,
+.terms-container h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--fg);
+}
+
+.policy-container h3,
+.terms-container h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.policy-container p,
+.policy-container li,
+.terms-container p,
+.terms-container li {
+  color: #3a3a3a;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.policy-container ul,
+.terms-container ul,
+.terms-container ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.policy-container li,
+.terms-container li {
+  margin-bottom: 0.4rem;
+}
+
+.policy-container a,
+.terms-container a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.policy-container strong,
+.terms-container strong {
+  font-weight: 600;
+}
+
+/* ── FOOTER OVERRIDES ── */
+footer {
+  font-size: 0.85rem;
+  border-top: 1px solid #e8e4de;
+  margin-top: 3rem;
+}
+
+footer a { color: var(--muted); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .policy-container,
+  .terms-container { padding: 6rem 1.25rem 3rem; }
+
+  .policy-container h1,
+  .terms-container h1 { font-size: 2rem; }
+}
