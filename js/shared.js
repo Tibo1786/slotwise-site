@@ -106,6 +106,24 @@
   links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', close); });
 })();
 
+// ── Config ──
+var SLOTWISE_WA_NUMBER = '34684482597';
+var SLOTWISE_TG_USERNAME = 'slotwise_bot';
+
+// ── Acquisition ref tracking ──
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var ref = (params.get('ref') || '').toLowerCase().trim();
+  if (ref && /^[a-z0-9_-]{1,32}$/.test(ref)) {
+    sessionStorage.setItem('slotwise-ref', ref);
+  }
+})();
+
+function getRef() {
+  var ref = sessionStorage.getItem('slotwise-ref');
+  return (ref && /^[a-z0-9_-]{1,32}$/.test(ref)) ? ref : null;
+}
+
 // ── WhatsApp click-to-chat ──
 function getWhatsAppLink() {
   var lang = window.slotwiseLang || (navigator.language || 'en').split('-')[0];
@@ -119,5 +137,15 @@ function getWhatsAppLink() {
     en: 'Hi! I want to try Slotwise 👋'
   };
   var msg = messages[lang] || messages['en'];
-  return 'https://wa.me/34684482597?text=' + encodeURIComponent(msg);
+  var ref = getRef();
+  if (ref) msg += ' ref:' + ref;
+  return 'https://wa.me/' + SLOTWISE_WA_NUMBER + '?text=' + encodeURIComponent(msg);
+}
+
+// ── Telegram deep link ──
+function getTelegramLink() {
+  var ref = getRef();
+  var url = 'https://t.me/' + SLOTWISE_TG_USERNAME;
+  if (ref) url += '?start=' + ref;
+  return url;
 }
